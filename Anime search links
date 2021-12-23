@@ -108,15 +108,15 @@ searches.push({alt:"NyaaTorrents", template:"https://nyaa.si/?q=%title%&f=0&c=1_
 searches.push({alt:"AnimeCSE", template:"https://cse.google.com/cse?cx=006516753008110874046:osnah6w0yw8#gsc.tab=0&gsc.q=%title%&gsc.sort=", img:suimg});
 searches.push({alt:"GOGO", template:"https://ww2.gogoanimes.org//search?keyword=%title%", img:ttimg});
 searches.push({alt:"AnimixPlay", template:"https://animixplay.to/?q=%title%", img:bbtimg});
-searches.push({alt:"AnimeKayo", template:"https://animekayo.com/?s=%title%", img:shanaimg});
-searches.push({alt:"KickAssTorrents", template:"https://newkatcr.co/katsearch/page/1/%title%", img:katimg});
-searches.push({alt:"Binsearch", template:"https://www.binsearch.info/?q=%title%&max=100&adv_age=1100&server=", img:bsimg});
+searches.push({alt:"KayoAnime", template:"https://kayoanime.com/?s=%title%", img:shanaimg});
+// searches.push({alt:"KickAssTorrents", template:"https://newkatcr.co/katsearch/page/1/%title%", img:katimg});
+// searches.push({alt:"Binsearch", template:"https://www.binsearch.info/?q=%title%&max=100&adv_age=1100&server=", img:bsimg});
 searches.push({alt:"YouTube", template:"https://www.youtube.com/results?search_query=%title%", img:ytimg});
 
-searches.push({alt:"Wikipedia", template:"https://en.wikipedia.org/wiki/Special:Search?search=%title%", img:wpimg});
+// searches.push({alt:"Wikipedia", template:"https://en.wikipedia.org/wiki/Special:Search?search=%title%", img:wpimg});
 searches.push({alt:"Google", template:'https://google.com/search?q="%title%"', img:gimg});
 searches.push({alt:"Google Image Search", template:'https://www.google.com/search?q="%title%"&tbm=isch&gws_rd=ssl', img:giimg});
-searches.push({alt:"Amazon", template:"https://www.amazon.com/s/?search-alias=popular&field-keywords=%title%", img:amazonimg});
+// searches.push({alt:"Amazon", template:"https://www.amazon.com/s/?search-alias=popular&field-keywords=%title%", img:amazonimg});
 searches.push({alt:"IMDB", template:"https://www.imdb.com/find?s=all&q=%title%", img:imimg});
 
 var anidb, ap, an, man, ann, au, hi10, gxs, xdcc, tvt, al, ks, lm;
