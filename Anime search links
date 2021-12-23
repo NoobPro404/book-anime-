@@ -109,7 +109,7 @@ searches.push({alt:"AnimeCSE", template:"https://cse.google.com/cse?cx=006516753
 searches.push({alt:"GOGO", template:"https://ww2.gogoanimes.org//search?keyword=%title%", img:ttimg});
 searches.push({alt:"AnimixPlay", template:"https://animixplay.to/?q=%title%", img:bbtimg});
 searches.push({alt:"KayoAnime", template:"https://kayoanime.com/?s=%title%", img:shanaimg});
-// searches.push({alt:"KickAssTorrents", template:"https://newkatcr.co/katsearch/page/1/%title%", img:katimg});
+searches.push({alt:"EricDrive", template:"https://drive.google.com/drive/u/4/search?q=type:video+%title%", img:katimg});
 // searches.push({alt:"Binsearch", template:"https://www.binsearch.info/?q=%title%&max=100&adv_age=1100&server=", img:bsimg});
 searches.push({alt:"YouTube", template:"https://www.youtube.com/results?search_query=%title%", img:ytimg});
 
