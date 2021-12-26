@@ -31,16 +31,16 @@ if(page === 'book'){
 	var bookList = document.querySelectorAll('#booksBody .title div a');
 	// Loop over all the books
 	for(var i=0; i<bookList.length; i++){
-		var mamSearchUrl = "https://www.myanonamouse.net/tor/browse.php?tor[text]=" + getBookTitle(bookList[i]);
+		var mamSearchUrl = "https://cse.google.com/cse?cx=010443774837511373696:vjjt104zsnm&q=" + getBookTitle(bookList[i]);
 		// Add 'Search MAM' button
 		var newLink = document.createElement('a');
-		var linkText = document.createTextNode('[Search MAM]');
+		var linkText = document.createTextNode('[Download PDF]');
 		newLink.appendChild(linkText);
 		newLink.setAttribute('href',mamSearchUrl);
 		newLink.setAttribute('style','color:#b3b3b3;font-style:italic');
 		bookList[i].parentNode.parentNode.appendChild(newLink);
 	}
-	console.log("[G+] 'Search MAM' buttons added!");
+	console.log("[G+] 'Download PDF' buttons added!");
 }
 
 // Grab book title (and only title) from the element
