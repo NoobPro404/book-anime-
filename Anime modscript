@@ -1,3 +1,24 @@
+// ==UserScript==
+// @name	Anime torrent search links
+// @namespace	Anime torrent search links
+// @description	Adds links to torrent searches and stuff to anidb, anime-planet, animenfo, myanimelist & animenewsnetwork
+// @include	*://anidb.net/anime/*
+// @include	*://anidb.net/perl-bin/animedb.pl?show=anime&aid=*
+// @include	*://www.anime-planet.com/anime/*
+// @exclude	*://www.anime-planet.com/anime/all?name=*
+// @include	*://www.animenfo.com/animetitle*
+// @include	*://myanimelist.net/anime/*
+// @include	*://myanimelist.net/anime/*/*
+// @include	*://www.animenewsnetwork.com/encyclopedia/anime.php?id=*
+// @include	*://hi10anime.com/?*=*
+// @exclude	*://anilist.co/anime/*
+// @exclude	*://kitsu.io/anime/*
+// @version	1.4.6
+// @author	brtkrbzhnv (creator), Serhiyko (v1.0.11), ShellC55 (v1.3), Scriptor (v1.4)
+// @grant	GM_setValue
+// @grant	GM_getValue
+/**************************************************************************
+**************************************************************************/
 // ==/UserScript==
 var ytimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABTElEQVR4nJ2SMUjDUBCGvxeLIDhI4+JsQGc3B9GhpdBRcHLPWJzEzdU6dunk4lSl1KGL2sVF1EEURaklTgUnYycFoe05vCQmNq3Rf7n/7r377967Q0TkoVaQ7fykiIhk7Krsn7clKQgISOdA278guP14VBAgqH5aygkgdvEqKBC2AwLvL4cCSLPblw+P+wnNbn+ogEFC7G2YPPVkIJ7yiVJKExEmZtY4KeVQSmEXL5kbU/SW15lPGWTsakRAeW39GylaLcgv+npAQj0Bji9QMpsWHPf7wDLDDYLz+iMWhf5Eazom2S8zGkbk4sISOK52HVf7eLxc0bxcgetnqJ0BoSlE4E/Eh2Vqkc0dyGa9YHuEwG+tB09VMQKNBpFPvbnVfr0Ou1tgKO3f3cPqip5C5/Mt6HzYVoT2DKWLMzWeRokIWGYobdguxMQdV30Bqesirj55WZIAAAAASUVORK5CYII%3D";
 var katimg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAAYCAMAAABUbfTxAAABj1BMVEUAAAAAgvv/0kAAgvsAqVsAqFv/1D0AgvoAdOf+0D4AqVz90kAAqF8AqVsAqVv/00AAdOMAqVv/0z78zT0AqVsAqloAqVv/0kD/0kAAqVsAqVsAqlkAqVsAqlsAqVz/zygAsUj/0kBJl8wAlY/BtF/yvTS+sF7/0kAAqVsAdeAAqVsAklAAfPD/0kAAmFMAqVv/0kAApGkAgvv/0kAAgvwAqVv/0kAAgvv1vS//0kD/0kAAklAAqVu9um2ItUgAgvPFxkUWiOoAoVcAqVv/0kCHo4sAk5MAqVv/0kDxuzMAgvsAlKMAgvsAqVv/0kD/0kAAgvsAqVsAqVsAklAAfv//0kAAgvsprFUAgf//0kB/skkAgvsAgvz/0kAAqVsMhfG/sF0Af/cAd+cAqlkAplkAoFcBlVEAklD/0T78zDv1vTAAffIAdOQAdOL5xjf2wTQAedUAhswAfcoAhrMAjaEAmIYAnncAo2vEuWIOoVQAmlQWmU9ns00rnU1FpEx4sUmZuUa5wETIxEPgykLxzkFfBeTHAAAAXHRSTlMAnp/y2I88NzUjBf79/fv08u3r0r+2oZOMaUwwIx0RDwwIBf7+/Pr59PPz8/Lt6eXk4+HY1s++vLqxq6qpp6Ohl4uJgH58em1ramllY19dS0lAPTgzMC0mIRoSEF1M+6wAAAE6SURBVDjLhdJVWwJBFIDhJdwQJEVARRC7u7u7W5cxltC1u9sf7sa5gNmd5bs7z/NeTBwKb2vYrObnqGzlvNliav5sdMX9/A22gTamER9KfPwB7ik1tAsOFE9+ga1aNKKhDiTZ91/A3h0DO4akXlKfMWicTIuaZJtIvf6Abd4g0dwCpNq6QSdgM+l6hdWKjSf7dnvBOpf0aUk+Umtco2gP4M6wrp3KAzsqDQGwtmk9WmwFag1JE+c9OVZwG6e3CEAdQWWcqbi8UHhAS1fdYH0RZQ53i6Iocw+tea9+oPZJlmUZhlmfqDyQK38aiBKOIJTVuFz1Frl9aIR0tceb87NTPr32bUpTUHmyO5zys4SvEB6ujg4zadee7hfXIvstTi3LhNUR7nHKm6KElWy55rFaNylCc0MmrHkqrX+MCo5JrhlaLgAAAABJRU5ErkJggg==";
