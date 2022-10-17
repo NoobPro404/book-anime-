@@ -1,48 +1,94 @@
 // ==UserScript==
 // @name         Goodreads Plus
 // @namespace    https://greasyfork.org/en/users/78880
-// @version      0.2
-// @description  Add "Search MAM" button to Goodreads
+// @version      0.3.13
+// @description  Add "Download PDF" button to Goodreads
 // @author       Slengpung
-// @include      https://www.goodreads.com/*
+// @match        https://www.goodreads.com/*
 // @grant        none
-//	var mamSearchUrl = "https://www.myanonamouse.net/tor/browse.php?tor[text]=" + bookTitle;
+// @license      MIT
 // ==/UserScript==
 
-console.log("[G+] Tweaking Goodreads...");
+window.addEventListener("load", Greasemonkey_main, false);
+ 
+function Greasemonkey_main() {
+ 
+    console.log("[G+] Tweaking Goodreads...");
+ 
+    var page = window.location.pathname.split('/')[1];
+    var mamSearchUrl = "";
+    var buttonBar = "";
+    var mamButton = "";
+    var buttonUl = "";
+    var bookTitle = "";
+ 
+    if(page === 'book'){
+        console.log("[G+] We got a book URL");
 
-var page = window.location.pathname.split('/')[1];
-
-if(page === 'book'){
-	var bookTitle = getBookTitle(document.getElementById("bookTitle"));
-	var mamSearchUrl = "https://cse.google.com/cse?cx=010443774837511373696:vjjt104zsnm&q=" + bookTitle;
-	// Add 'Search MAM' button
-	var buttonBar = document.getElementById("buyButtonContainer");
-	if (buttonBar === null || buttonBar == "null") {
-		buttonBar = document.getElementById("asyncBuyButtonContainer");
-	}
-	var buttonUl  = buttonBar.getElementsByTagName("ul");
-	var mamButton = document.createElement("li");
-	mamButton.innerHTML = '<a id="mamLink" href="' + mamSearchUrl + '" target="_blank" class="buttonBar">Download PDF</a>';
-	mamButton.className = "Button";
-	buttonUl[0].appendChild(mamButton);
-	console.log("[G+] 'Download PDF' button added!");
-}else if(page === 'review'){
-	var bookList = document.querySelectorAll('#booksBody .title div a');
-	// Loop over all the books
-	for(var i=0; i<bookList.length; i++){
-		var mamSearchUrl = "https://cse.google.com/cse?cx=010443774837511373696:vjjt104zsnm&q=" + getBookTitle(bookList[i]);
-		// Add 'Search MAM' button
-		var newLink = document.createElement('a');
-		var linkText = document.createTextNode('[Download PDF]');
-		newLink.appendChild(linkText);
-		newLink.setAttribute('href',mamSearchUrl);
-		newLink.setAttribute('style','color:#b3b3b3;font-style:italic');
-		bookList[i].parentNode.parentNode.appendChild(newLink);
-	}
-	console.log("[G+] 'Download PDF' buttons added!");
+        // Try different ways to grab book title
+        try {
+            bookTitle = document.getElementsByClassName("Text__title1")[0].innerHTML;
+        }
+        catch {
+            bookTitle = document.getElementById("bookTitle").innerText;
+        }
+        finally {
+            console.log("[G+] Book title: " + bookTitle);
+            bookTitle = bookTitle.replace('&amp;', '%26');
+            bookTitle = bookTitle.replace('&', '%26');
+        }
+        
+        mamSearchUrl = "https://cse.google.com/cse?cx=010443774837511373696:vjjt104zsnm&q=" + bookTitle;
+ 
+        // Add 'Download PDF' button
+        // Old or new layout?
+        var old = document.getElementById("buyButtonContainer");
+        if(old != null) {
+            console.log("[G+] Old layout");
+            buttonBar = document.getElementById("buyButtonContainer");
+        	if (buttonBar === null || buttonBar == "null") {
+        		buttonBar = document.getElementById("asyncBuyButtonContainer");
+        	}
+        	buttonUl = buttonBar.getElementsByTagName("ul");
+        	mamButton = document.createElement("li");
+        	mamButton.innerHTML = '<a id="mamLink" href="' + mamSearchUrl + '" target="_blank" class="buttonBar">Download PDF</a>';
+        	mamButton.className = "Button";
+        	buttonUl[0].appendChild(mamButton);
+        	console.log("[G+] 'Download PDF' button added!");
+        }
+        else {
+            console.log("[G+] New layout");
+            buttonBar = document.getElementsByClassName("BookActions")[0];
+            mamButton = document.getElementsByClassName("BookActions__button")[0].cloneNode(true);
+            mamButton.innerHTML = '<div class="BookActions__button"><a href="' + mamSearchUrl + '">' +
+                '<div class="Button__container Button__container--block">' +
+                '<button type="button" class="Button Button--secondary Button--medium Button--block">' +
+                '<span class="Button__labelItem" style="text-decoration=none">Download PDF</span></button></div></a></div>';
+     
+            buttonBar.appendChild(mamButton)
+            console.log("[G+] 'Download PDF' button added!");
+        }
+    } else if(page === 'review'){
+        var bookList = document.querySelectorAll('#booksBody .title div a');
+        // Loop over all the books
+        for(var i=0; i<bookList.length; i++){
+            bookTitle = getBookTitle(bookList[i]);
+            bookTitle = bookTitle.replace('&amp;', '%26');
+            bookTitle = bookTitle.replace('&', '%26');
+            mamSearchUrl = "https://cse.google.com/cse?cx=010443774837511373696:vjjt104zsnm&q=" + bookTitle;
+            // Add 'Download PDF' button
+            var newLink = document.createElement('a');
+            var linkText = document.createTextNode('[Download PDF]');
+            newLink.appendChild(linkText);
+            newLink.setAttribute('href',mamSearchUrl);
+            newLink.setAttribute('style','color:#b3b3b3;font-style:italic');
+            bookList[i].parentNode.parentNode.appendChild(newLink);
+        }
+        console.log("[G+] 'Download PDF' buttons added!");
+    }
+ 
 }
-
+ 
 // Grab book title (and only title) from the element
 function getBookTitle(el){
 	var bookTitle = el.innerHTML.trim().split('<', 1)+'';
